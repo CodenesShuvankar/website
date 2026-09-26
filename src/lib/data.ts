@@ -11,119 +11,109 @@ export type Glyph =
   | 'terminal'
   | 'shield'
   | 'spark'
+  | 'doc'
+  | 'users'
+  | 'clock'
+  | 'stamp'
+  | 'coins'
 
-export interface Integration {
-  name: string
-  glyph: Glyph
-  category: 'Marketplace' | 'ERP & Finance' | 'Payments' | 'Data & Infra'
-}
-
-export const INTEGRATIONS: Integration[] = [
-  { name: 'Shopify', glyph: 'bag', category: 'Marketplace' },
-  { name: 'Amazon', glyph: 'cloud', category: 'Marketplace' },
-  { name: 'SAP', glyph: 'grid', category: 'ERP & Finance' },
-  { name: 'Tally', glyph: 'chart', category: 'ERP & Finance' },
-  { name: 'NetSuite', glyph: 'cloud', category: 'ERP & Finance' },
-  { name: 'Xero', glyph: 'spark', category: 'ERP & Finance' },
-  { name: 'QuickBooks', glyph: 'db', category: 'ERP & Finance' },
-  { name: 'Stripe', glyph: 'bolt', category: 'Payments' },
-  { name: 'Razorpay', glyph: 'bolt', category: 'Payments' },
-  { name: 'Adyen', glyph: 'shield', category: 'Payments' },
-  { name: 'PayPal', glyph: 'link', category: 'Payments' },
-  { name: 'WooCommerce', glyph: 'bag', category: 'Marketplace' },
-  { name: 'Flipkart', glyph: 'box', category: 'Marketplace' },
-  { name: 'Meesho', glyph: 'box', category: 'Marketplace' },
-  { name: 'PostgreSQL', glyph: 'db', category: 'Data & Infra' },
-  { name: 'Snowflake', glyph: 'snow', category: 'Data & Infra' },
-  { name: 'S3 Warehouse', glyph: 'box', category: 'Data & Infra' },
-  { name: 'dbt', glyph: 'terminal', category: 'Data & Infra' },
-]
+/* ── Navigation ────────────────────────────────────────────────── */
 
 export interface NavLink {
   label: string
   href: string
-  description: string
-  columns?: ('Platform' | 'Modules' | 'Resources')[]
 }
 
 export const NAV_LINKS: NavLink[] = [
-  {
-    label: 'Platform',
-    href: '#features',
-    description: 'The AI reconciliation and revenue intelligence engine',
-    columns: ['Platform', 'Modules'],
-  },
-  {
-    label: 'Developers',
-    href: '#developers',
-    description: 'REST & GraphQL APIs, SDKs, and reference architecture',
-    columns: ['Resources'],
-  },
-  {
-    label: 'Integrations',
-    href: '#integrations',
-    description: 'Pre-built connectors for marketplaces, ERPs, and PSPs',
-    columns: ['Modules'],
-  },
-  {
-    label: 'Pricing',
-    href: '#roi',
-    description: 'Outcome-based pricing tied to reconciled volume',
-  },
+  { label: 'Services', href: '#services' },
+  { label: 'Industries', href: '#industries' },
+  { label: 'Results', href: '#results' },
+  { label: 'Technology', href: '#technology' },
+  { label: 'Insights', href: '#insights' },
 ]
 
-export interface Feature {
+/* ── Industries served ─────────────────────────────────────────── */
+
+export interface Industry {
+  name: string
+  glyph: Glyph
+}
+
+export const INDUSTRIES: Industry[] = [
+  { name: 'E-commerce & D2C', glyph: 'bag' },
+  { name: 'SaaS & Technology', glyph: 'terminal' },
+  { name: 'Manufacturing', glyph: 'box' },
+  { name: 'Healthcare & Diagnostics', glyph: 'shield' },
+  { name: 'Real Estate & Construction', glyph: 'grid' },
+  { name: 'Logistics & Supply Chain', glyph: 'cloud' },
+  { name: 'Professional Services', glyph: 'spark' },
+  { name: 'Startups & Scale-ups', glyph: 'bolt' },
+  { name: 'Retail & FMCG', glyph: 'bag' },
+  { name: 'Fintech & NBFCs', glyph: 'db' },
+  { name: 'Education & EdTech', glyph: 'snow' },
+  { name: 'Hospitality & Travel', glyph: 'clock' },
+  { name: 'Hospitality', glyph: 'clock' },
+  { name: 'Renewable Energy', glyph: 'spark' },
+  { name: 'Non-Profit & Trusts', glyph: 'users' },
+  { name: 'Export & Import', glyph: 'link' },
+]
+
+/* ── Services (bento) ──────────────────────────────────────────── */
+
+export interface Service {
   eyebrow: string
   title: string
   body: string
   glyph: Glyph
-  span: 'wide' | 'tall' | 'normal'
+  span: 'tall' | 'normal' | 'wide'
   bullets?: string[]
 }
 
-export const FEATURES: Feature[] = [
+export const SERVICES: Service[] = [
   {
-    eyebrow: 'AI-Powered Intelligence',
-    title: 'Predictive insights that resolve exceptions before they escalate',
-    body: 'Multimodal models read invoices, POs, contracts, and remittance notes as documents — not fields. Every mismatch is scored, clustered by root cause, and routed with a recommended action and a confidence level your team can accept or override.',
-    glyph: 'spark',
+    eyebrow: 'Statutory Audit',
+    title: 'Audits that stand up to the regulator and your investors',
+    body: 'Risk-based audit programmes under SA 200, executed by qualified chartered accountants. We test the assertions that matter, document the exceptions properly, and deliver a signed audit report without last-minute surprises.',
+    glyph: 'shield',
     span: 'tall',
     bullets: [
-      'Multimodal document understanding',
-      'Root-cause clustering of exceptions',
-      'Auto-resolved exception handling',
+      'SA 200 risk-based planning',
+      'CARO & NFRA reporting',
+      'Group & consolidated audits',
     ],
   },
   {
-    eyebrow: 'Single Source of Truth',
-    title: 'One reconciled ledger across every marketplace and ERP',
-    body: 'Orders, payouts, fees, refunds, chargebacks, FX, and tax net out into a single immutable ledger entry. Close the books on live data instead of exported spreadsheets.',
-    glyph: 'db',
+    eyebrow: 'Tax Compliance',
+    title: 'Direct, indirect and transfer-pricing compliance',
+    body: 'Income tax, TDS/TCS, GST, and transfer pricing — filed on time, every time, with reconciliations that tie back to your books.',
+    glyph: 'stamp',
     span: 'normal',
   },
   {
-    eyebrow: 'Revenue Execution',
-    title: 'Recover short payments and cut manual operations',
-    body: 'HMRECON detects under-settled payouts, withheld commissions, and unclaimed chargebacks, then files claims and chases collections on your behalf — automatically.',
+    eyebrow: 'Financial Reporting',
+    title: 'Ind AS, IFRS and Companies Act close',
+    body: 'Ind AS-compliant financial statements, board packs, and monthly MIS — prepared on a documented, reviewable accounting policy set.',
+    glyph: 'doc',
+    span: 'normal',
+  },
+  {
+    eyebrow: 'Revenue Assurance',
+    title: 'We reconcile what you earned against what you were paid',
+    body: 'Order-level reconciliation across marketplaces, PSPs and ERPs. We identify short settlements, unclaimed credits and duplicate payouts — and file the claims on your behalf.',
     glyph: 'bolt',
     span: 'normal',
   },
   {
-    eyebrow: 'Continuous Assurance',
-    title: 'Audit-ready by default, not by quarter-end scramble',
-    body: 'Every adjustment is versioned, attributed, and traceable to its source document. Export a defensible audit trail without touching a spreadsheet.',
-    glyph: 'shield',
-    span: 'normal',
-  },
-  {
-    eyebrow: 'Realtime Ingestion',
-    title: 'Streaming connectors that go live in minutes, not quarters',
-    body: 'Managed webhooks, CDC pipelines, and nightly backfills normalize every source into a canonical financial schema. Ship a new connector with the SDK, or let us build it.',
-    glyph: 'link',
+    eyebrow: 'CFO Advisory',
+    title: 'Fractional CFO, outsourced finance and diligence',
+    body: 'CFO-as-a-service, outsourced bookkeeping and payroll, fundraise and M&A due diligence, internal audit, and governance support — on retainer or per engagement.',
+    glyph: 'spark',
     span: 'wide',
-    bullets: ['Managed webhooks & CDC', 'Canonical financial schema', 'Zero-config backfills'],
+    bullets: ['Fractional CFO retainer', 'Due diligence & valuations', 'Internal audit & IFRS readiness'],
   },
 ]
+
+/* ── Results / outcomes ────────────────────────────────────────── */
 
 export interface Stat {
   value: number
@@ -136,73 +126,167 @@ export interface Stat {
 
 export const STATS: Stat[] = [
   {
-    value: 99,
+    value: 1200,
+    suffix: '+',
+    prefix: '',
+    decimals: 0,
+    label: 'Engagements Delivered',
+    detail: 'Across audits, tax filings, board reporting and diligence since 2011.',
+  },
+  {
+    value: 98,
     suffix: '%',
     prefix: '',
     decimals: 0,
-    label: 'Invoice Accuracy',
-    detail: 'Median match accuracy across 40M+ monthly transaction lines.',
+    label: 'On-Time Statutory Filings',
+    detail: 'No late GSTR-3B, TDS, ROC or income tax returns across the last three assessment years.',
   },
   {
-    value: 90,
-    suffix: '%',
+    value: 15,
+    suffix: ' yrs',
     prefix: '',
     decimals: 0,
-    label: 'Reduction in Manual Ops',
-    detail: 'Fewer touches per close cycle, measured across 400+ finance teams.',
+    label: 'Average Partner Experience',
+    detail: 'Every engagement is led by a chartered accountant, never delegated to a junior team.',
   },
   {
-    value: 4.2,
-    suffix: 'B',
-    prefix: '$',
-    decimals: 1,
-    label: 'Reconciled Monthly Volume',
-    detail: 'Gross merchandise value processed and verified each month.',
-  },
-  {
-    value: 11,
+    value: 6.2,
     suffix: ' days',
     prefix: '',
-    decimals: 0,
-    label: 'Faster Time to Close',
-    detail: 'From period-end to a fully reconciled, signed-off ledger.',
+    decimals: 1,
+    label: 'Average Turnaround',
+    detail: 'Books to reviewed financials, against an industry average of roughly 21 days.',
   },
 ]
 
-export interface CodeLine {
-  indent: number
-  tokens: string
+export const TESTIMONIALS = [
+  {
+    quote:
+      'HMRECON found ₹38 lakh of unclaimed input tax credits and a channel under-settlement pattern our own team had missed for three years. They filed the claims and recovered it in one quarter.',
+    name: 'Ananya Iyer',
+    role: 'Director, D2C Group · 4 storefronts, 9 marketplaces',
+    metric: '₹38 L recovered in one quarter',
+  },
+  {
+    quote:
+      'Our statutory audit was the first one in four years that came back with no management letter observations. The reconciliation pack they built is now the single source of truth for our board.',
+    name: 'Rohit Malhotra',
+    role: 'CFO, Manufacturing · SAP + Tally, 3 entities',
+    metric: 'Clean audit, zero observations',
+  },
+  {
+    quote:
+      'We were raising a Series B and needed audited financials plus a diligence-grade data room in six weeks. Their team delivered in four, and walked our investors through it.',
+    name: 'Kavya Nair',
+    role: 'Co-founder, B2B SaaS · Seed to Series B',
+    metric: 'Diligence-ready in 4 weeks',
+  },
+]
+
+export const DIAGNOSTIC_STATS = [
+  { v: '₹0', l: 'Upfront cost' },
+  { v: '45 min', l: 'Diagnostic call' },
+  { v: '5 days', l: 'To a scoped proposal' },
+  { v: 'Fixed', l: 'Fee, no hourly billing' },
+]
+
+/* ── Engagement timeline (delivery tab) ────────────────────────── */
+
+export const ENGAGEMENT_PHASES = [
+  { phase: 'Scoping', detail: 'Entity map, materiality, risk assessment', days: 'Day 1–2', done: true },
+  { phase: 'Records & PBC', detail: 'Document request list, ledger access, confirmations', days: 'Day 2–5', done: true },
+  { phase: 'Fieldwork', detail: 'Testing, sampling, reconciliations, queries', days: 'Day 5–12', done: true },
+  { phase: 'Review & Adjustments', detail: 'Partner review, journal testing, reporting', days: 'Day 12–16', done: false },
+  { phase: 'Sign-off & Filing', detail: 'Audit report, board approval, statutory filing', days: 'Day 16–20', done: false },
+]
+
+/* ── Client portal (security tab) ──────────────────────────────── */
+
+export const PORTAL_ITEMS = [
+  { name: 'GSTR-3B · Jul 2026', type: 'Statutory return', state: 'Filed', tone: 'signal' },
+  { name: 'TDS Returns · Q1 FY27', type: 'Statutory return', state: 'Filed', tone: 'signal' },
+  { name: 'Bank Confirmations', type: 'Audit evidence', state: 'Received', tone: 'signal' },
+  { name: 'Channel Settlement Reconciliation', type: 'Revenue assurance', state: 'In review', tone: 'brand' },
+  { name: 'Inventory Count Sheet', type: 'Audit evidence', state: 'Awaiting client', tone: 'alert' },
+  { name: 'Related Party Transactions', type: 'Disclosure', state: 'Draft', tone: 'ink' },
+]
+
+export const LEDGER_ROWS = [
+  { id: 'SET-0426', channel: 'Amazon Seller', gross: '₹48,21,000.00', net: '₹45,55,580.00', state: 'Short', conf: 94.2 },
+  { id: 'SET-0427', channel: 'Shopify India', gross: '₹31,88,450.00', net: '₹31,88,450.00', state: 'Cleared', conf: 100 },
+  { id: 'SET-0428', channel: 'SAP · Channel Sales', gross: '₹1,22,40,000.00', net: '₹1,19,33,218.00', state: 'Short', conf: 91.7 },
+  { id: 'SET-0429', channel: 'Tally · Direct', gross: '₹76,12,075.00', net: '₹76,12,075.00', state: 'Cleared', conf: 99.6 },
+  { id: 'SET-0430', channel: 'Razorpay', gross: '₹54,00,910.00', net: '₹51,88,022.00', state: 'Claimed', conf: 96.4 },
+]
+
+/* ── Systems & security ────────────────────────────────────────── */
+
+export const SYSTEMS = [
+  { label: 'Secure Client Portal', value: 'Document exchange with full trail' },
+  { label: '256-bit Encryption', value: 'At rest and in transit' },
+  { label: 'Multi-Factor Auth', value: 'Mandatory on all client accounts' },
+  { label: 'Role-Based Access', value: 'Partner / manager / client separation' },
+  { label: 'Immutable Audit Log', value: 'Every access and edit recorded' },
+  { label: 'India Data Residency', value: 'Servers hosted in-country' },
+  { label: 'AES-256 Backups', value: 'Hourly, 7-year retention' },
+  { label: 'Digital Signatures', value: 'DSC-backed filing and sign-off' },
+]
+
+export const PRINCIPLES = [
+  {
+    title: 'Partner-led, always',
+    body: 'The partner who scopes your engagement signs your report. We do not staff engagements with juniors and hope for the best.',
+    glyph: 'users' as const,
+  },
+  {
+    title: 'Confidential by default',
+    body: 'Mutual NDAs before the first call, least-privilege access, and a documented retention schedule we will show you on request.',
+    glyph: 'shield' as const,
+  },
+  {
+    title: 'Nothing filed silently',
+    body: 'Every return, adjustment and claim is prepared, reviewed by a second qualified member, and shared with you before submission.',
+    glyph: 'stamp' as const,
+  },
+]
+
+/* ── Insights ──────────────────────────────────────────────────── */
+
+export interface Insight {
+  tag: string
+  title: string
+  read: string
+  date: string
 }
 
-export const API_SNIPPET: CodeLine[] = [
-  { indent: 0, tokens: "// One call to fuse, match and settle a settlement file" },
-  { indent: 0, tokens: "const recon = await hmrecon.reconcile.create({" },
-  { indent: 1, tokens: "source: 'amazon_marketplace'," },
-  { indent: 1, tokens: "period: { from: '2026-08-01', to: '2026-08-31' }," },
-  { indent: 1, tokens: "strategy: 'ai_multimodal'," },
-  { indent: 1, tokens: "policies: { autoFileClaims: true, tolerancePct: 0.5 }," },
-  { indent: 1, tokens: "webhook: { url: env('RECON_WEBHOOK_URL') }," },
-  { indent: 0, tokens: "})" },
-  { indent: 0, tokens: "" },
-  { indent: 0, tokens: "recon.on('settled', (run) => {" },
-  { indent: 1, tokens: "console.log(run.ledgerId, run.accuracy)" },
-  { indent: 0, tokens: "})" },
+export const INSIGHTS: Insight[] = [
+  {
+    tag: 'Direct Tax',
+    title: 'Section 194Q, 194J and the 10% TDS regime: what changed this quarter',
+    read: '6 min read',
+    date: 'Aug 2026',
+  },
+  {
+    tag: 'Indirect Tax',
+    title: 'GSTR-2B auto-population is now final. Your ITC claims are shifting.',
+    read: '9 min read',
+    date: 'Aug 2026',
+  },
+  {
+    tag: 'Revenue Assurance',
+    title: 'Why marketplaces under-settle, and the four-line reconciliation that catches it',
+    read: '11 min read',
+    date: 'Jul 2026',
+  },
+  {
+    tag: 'Governance',
+    title: 'What NFRA-registered entities should expect from their first audit',
+    read: '7 min read',
+    date: 'Jul 2026',
+  },
 ]
 
-export const SCHEMA_SNIPPET: CodeLine[] = [
-  { indent: 0, tokens: 'model LedgerEntry {' },
-  { indent: 1, tokens: 'id          String   @id @default(cuid())' },
-  { indent: 1, tokens: 'period      DateTime @db.Date' },
-  { indent: 1, tokens: 'source      String' },
-  { indent: 1, tokens: 'grossCents  Int      @db.BigInt' },
-  { indent: 1, tokens: 'feesCents   Int      @db.BigInt' },
-  { indent: 1, tokens: 'netCents    Int      @db.BigInt' },
-  { indent: 1, tokens: 'confidence  Decimal  @db.Decimal(5, 4)' },
-  { indent: 1, tokens: 'lineItems   LineItem[]' },
-  { indent: 0, tokens: '' },
-  { indent: 1, tokens: '@@index([period, source(sort: Desc)])' },
-  { indent: 0, tokens: '}' },
-]
+/* ── Footer ────────────────────────────────────────────────────── */
 
 export interface FooterColumn {
   title: string
@@ -211,87 +295,80 @@ export interface FooterColumn {
 
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
-    title: 'Product',
+    title: 'Services',
     links: [
-      { label: 'Reconciliation Engine', href: '#features' },
-      { label: 'Revenue Intelligence', href: '#features' },
-      { label: 'Exception Automation', href: '#features' },
-      { label: 'Single Source of Truth', href: '#features' },
-      { label: 'Short Payment Recovery', href: '#features' },
-      { label: 'Continuous Assurance', href: '#features' },
-      { label: 'Payout Reconciliation', href: '#features' },
-      { label: 'Chargeback Automation', href: '#features' },
+      { label: 'Statutory Audit', href: '#services' },
+      { label: 'Internal & Forensic Audit', href: '#services' },
+      { label: 'Direct Tax Advisory', href: '#services' },
+      { label: 'GST & Indirect Tax', href: '#services' },
+      { label: 'Transfer Pricing', href: '#services' },
+      { label: 'Financial Reporting', href: '#services' },
+      { label: 'Revenue Assurance', href: '#services' },
+      { label: 'CFO Advisory', href: '#services' },
     ],
   },
   {
-    title: 'Modules',
+    title: 'Engagements',
     links: [
-      { label: 'Marketplace Connector', href: '#integrations' },
-      { label: 'ERP & GL Sync', href: '#integrations' },
-      { label: 'PSP Settlement Engine', href: '#integrations' },
-      { label: 'Tax & FX Normalization', href: '#integrations' },
-      { label: 'Audit Trail Vault', href: '#developers' },
-      { label: 'Revenue Leak Radar', href: '#features' },
-      { label: 'Close Automation', href: '#features' },
-      { label: 'Custom Connector SDK', href: '#developers' },
+      { label: 'Outsourced Accounting', href: '#services' },
+      { label: 'Bookkeeping & Payroll', href: '#services' },
+      { label: 'Fundraise Due Diligence', href: '#services' },
+      { label: 'M&A Transaction Support', href: '#services' },
+      { label: 'Valuation & Fairness Opinion', href: '#services' },
+      { label: 'IFRS / Ind AS Readiness', href: '#services' },
+      { label: 'Company Incorporation', href: '#contact' },
+      { label: 'Compliance Calendar', href: '#insights' },
     ],
   },
   {
-    title: 'Use Cases',
+    title: 'Industries',
     links: [
-      { label: 'Multi-Channel Commerce', href: '#integrations' },
-      { label: 'D2C & Retail Reconciliation', href: '#features' },
-      { label: 'Global ERP Consolidation', href: '#integrations' },
-      { label: 'Payment Provider Reconciliation', href: '#integrations' },
-      { label: 'Franchise & Marketplace Payouts', href: '#features' },
-      { label: 'Subscription Billing Ops', href: '#features' },
-      { label: 'FP&A Revenue Truth', href: '#roi' },
-      { label: 'External Audit Preparation', href: '#features' },
+      { label: 'E-commerce & D2C', href: '#industries' },
+      { label: 'SaaS & Technology', href: '#industries' },
+      { label: 'Manufacturing', href: '#industries' },
+      { label: 'Healthcare & Diagnostics', href: '#industries' },
+      { label: 'Real Estate', href: '#industries' },
+      { label: 'Fintech & NBFCs', href: '#industries' },
+      { label: 'Logistics', href: '#industries' },
+      { label: 'Startups & Scale-ups', href: '#industries' },
     ],
   },
   {
-    title: 'Developers',
+    title: 'Firm',
     links: [
-      { label: 'API Reference', href: '#developers' },
-      { label: 'REST API v1', href: '#developers' },
-      { label: 'GraphQL Explorer', href: '#developers' },
-      { label: 'TypeScript SDK', href: '#developers' },
-      { label: 'Python SDK', href: '#developers' },
-      { label: 'Webhook Events', href: '#developers' },
-      { label: 'Authentication & RLS', href: '#developers' },
-      { label: 'Changelog', href: '#developers' },
-    ],
-  },
-  {
-    title: 'Company',
-    links: [
-      { label: 'About HMRECON', href: '#' },
-      { label: 'Careers', href: '#' },
-      { label: 'Security & Trust', href: '#' },
-      { label: 'Compliance Center', href: '#' },
-      { label: 'Customer Stories', href: '#roi' },
-      { label: 'Partners', href: '#integrations' },
-      { label: 'Press Kit', href: '#' },
-      { label: 'Contact Sales', href: '#demo' },
+      { label: 'About HMRECON', href: '#about' },
+      { label: 'Our Partners', href: '#about' },
+      { label: 'Client Portal', href: '#contact' },
+      { label: 'Insights', href: '#insights' },
+      { label: 'Careers', href: '#contact' },
+      { label: 'Fees & Engagement Terms', href: '#contact' },
+      { label: 'Client Testimonials', href: '#results' },
+      { label: 'Contact Our Offices', href: '#contact' },
     ],
   },
 ]
 
 export const COMPLIANCE_BADGES = [
-  'SOC 2 Type II',
+  'ICAI Registered',
+  'Chartered Accountants',
   'ISO 27001',
-  'GDPR',
-  'SOC 1',
-  'HIPAA',
-  'PCI DSS L1',
-  'DPA',
-  'CCPA',
+  'SOC 2 Type II',
+  'GDPR Compliant',
+  'DPDP Act 2023',
+  'NASBA Member',
+  'XBRL Enabled',
 ]
 
-export const RECON_ROWS = [
-  { id: 'TXN-88213', channel: 'Amazon US', gross: '$48,210.00', net: '$43,997.41', status: 'Matched', conf: 99.8 },
-  { id: 'TXN-88214', channel: 'Shopify', gross: '$31,884.50', net: '$31,884.50', status: 'Matched', conf: 100 },
-  { id: 'TXN-88215', channel: 'SAP FI', gross: '$122,400.00', net: '$119,332.18', status: 'Exception', conf: 91.2 },
-  { id: 'TXN-88216', channel: 'Tally', gross: '$76,120.75', net: '$76,120.75', status: 'Matched', conf: 99.6 },
-  { id: 'TXN-88217', channel: 'Adyen', gross: '$54,009.10', net: '$51,880.22', status: 'Recovering', conf: 96.4 },
+export const OFFICES = [
+  { city: 'Mumbai', line: 'Bandra Kurla Complex' },
+  { city: 'Bengaluru', line: 'Koramangala' },
+  { city: 'New Delhi', line: 'Nehru Place' },
+  { city: 'Chennai', line: 'Adyar' },
+]
+
+export const SLA = [
+  { label: 'Email', value: '< 4 hrs' },
+  { label: 'Phone', value: '< 1 hr' },
+  { label: 'Portal', value: '24 / 7' },
+  { label: 'Filings on track', value: '100%' },
 ]

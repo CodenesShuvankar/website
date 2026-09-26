@@ -1,5 +1,5 @@
 import { areaPath, smoothPath, type Point } from '@/lib/chart'
-import { RECON_ROWS } from '@/lib/data'
+import { LEDGER_ROWS } from '@/lib/data'
 import { Glyph } from '@/components/ui/Glyph'
 
 const RECONCILED: Point[] = [
@@ -7,37 +7,37 @@ const RECONCILED: Point[] = [
   [296, 108], [344, 78], [392, 85], [440, 57], [488, 63], [536, 33],
 ]
 
-const LEAKAGE: Point[] = [
+const SHORT_PAID: Point[] = [
   [8, 184], [56, 181], [104, 177], [152, 173], [200, 171], [248, 165],
   [296, 161], [344, 157], [392, 152], [440, 148], [488, 144], [536, 139],
 ]
 
 const SIDEBAR = [
-  { label: 'Overview', glyph: 'grid' },
-  { label: 'Reconciliation', glyph: 'db' },
-  { label: 'Exceptions', glyph: 'spark' },
-  { label: 'Recoveries', glyph: 'bolt' },
-  { label: 'Ledger', glyph: 'chart' },
-  { label: 'Integrations', glyph: 'link' },
-  { label: 'Developers', glyph: 'terminal' },
+  { label: 'Dashboard', glyph: 'grid' },
+  { label: 'Revenue Assurance', glyph: 'db' },
+  { label: 'Audit Planning', glyph: 'shield' },
+  { label: 'Findings', glyph: 'spark' },
+  { label: 'Filings', glyph: 'doc' },
+  { label: 'Tax Positions', glyph: 'stamp' },
+  { label: 'Client Portal', glyph: 'users' },
 ] as const
 
 const KPIS = [
-  { label: 'Reconciled Volume', value: '$4.21B', delta: '+12.4%', tone: 'brand' as const },
-  { label: 'Revenue Recovered', value: '$3.84M', delta: '+18.9%', tone: 'signal' as const },
-  { label: 'Open Exceptions', value: '212', delta: '−64.1%', tone: 'ink' as const },
+  { label: 'Revenue Reconciled', value: '₹48.2 Cr', delta: '+12.4%', tone: 'brand' as const },
+  { label: 'Short Payments Recovered', value: '₹1.84 Cr', delta: '+18.9%', tone: 'signal' as const },
+  { label: 'Open Audit Findings', value: '18', delta: '−64.1%', tone: 'ink' as const },
 ]
 
-const EXCEPTIONS = [
-  { label: 'Commission under-settlement', source: 'Amazon US', score: 96, tone: 'signal' },
-  { label: 'Duplicate invoice, net variance', source: 'SAP FI', score: 88, tone: 'brand' },
-  { label: 'Unclaimed chargeback window', source: 'Adyen', score: 74, tone: 'alert' },
+const FINDINGS = [
+  { label: 'Channel under-settlement · Amazon', score: 96, tone: 'signal' },
+  { label: 'Unclaimed ITC, GSTR-2B variance', score: 88, tone: 'brand' },
+  { label: 'TDS deducted below section rate', score: 74, tone: 'alert' },
 ] as const
 
 function toneRing(tone: 'signal' | 'brand' | 'alert') {
-  if (tone === 'signal') return 'stroke-signal-500'
-  if (tone === 'brand') return 'stroke-brand-500'
-  return 'stroke-alert-500'
+  if (tone === 'signal') return 'text-signal-500'
+  if (tone === 'brand') return 'text-brand-500'
+  return 'text-alert-500'
 }
 
 function toneText(tone: 'signal' | 'brand' | 'alert') {
@@ -71,7 +71,7 @@ export function HeroDashboard() {
       />
 
       <div className="relative [transform-style:preserve-3d] [transform:rotateX(6deg)_rotateY(-13deg)] sm:[transform:rotateX(7deg)_rotateY(-11deg)]">
-        {/* ── Dashboard panel ─────────────────────────────────── */}
+        {/* ── Workspace panel ─────────────────────────────────── */}
         <div className="overflow-hidden rounded-[1.4rem] border border-white/12 bg-ink-950 shadow-[0_70px_140px_-50px_rgba(8,12,21,0.9),0_0_0_1px_rgba(255,255,255,0.05)]">
           {/* Title bar */}
           <div className="flex items-center gap-3 border-b border-white/8 bg-white/[0.03] px-4 py-3">
@@ -82,13 +82,15 @@ export function HeroDashboard() {
             </div>
             <div className="mx-auto flex items-center gap-2 rounded-md bg-white/5 px-3 py-1 font-mono text-[0.62rem] text-ink-400">
               <span className="size-1.5 rounded-full bg-signal-400 animate-blink" />
-              app.hmrecon.com/ledger
+              portal.hmrecon.com/close/FY26
             </div>
             <div className="hidden items-center gap-2 sm:flex">
               <span className="rounded-full bg-signal-500/12 px-2.5 py-1 text-[0.6rem] font-semibold tracking-wide text-signal-400 ring-1 ring-signal-500/25">
-                LIVE SYNC
+                CLOSE ON TRACK
               </span>
-              <span className="size-6 rounded-full bg-brand-gradient" />
+              <span className="grid size-6 place-items-center rounded-full bg-brand-gradient text-[0.55rem] font-bold text-white">
+                RK
+              </span>
             </div>
           </div>
 
@@ -96,7 +98,7 @@ export function HeroDashboard() {
             {/* Sidebar */}
             <aside className="hidden w-[11.5rem] shrink-0 flex-col border-r border-white/8 bg-white/[0.02] p-3 lg:flex">
               <p className="px-2.5 pt-1 pb-3 text-[0.58rem] font-semibold tracking-[0.18em] text-ink-500 uppercase">
-                Workspace
+                Engagement
               </p>
               <ul className="flex flex-col gap-0.5">
                 {SIDEBAR.map((item, i) => (
@@ -120,10 +122,10 @@ export function HeroDashboard() {
 
               <div className="mt-auto rounded-xl border border-white/8 bg-white/[0.03] p-3">
                 <div className="flex items-center gap-2">
-                  <Glyph name="shield" className="size-3.5 text-signal-400" />
-                  <p className="text-[0.66rem] font-semibold text-ink-200">Ledger sealed</p>
+                  <Glyph name="stamp" className="size-3.5 text-signal-400" />
+                  <p className="text-[0.66rem] font-semibold text-ink-200">Report signed</p>
                 </div>
-                <p className="mt-1.5 font-mono text-[0.58rem] text-ink-500">sha256:9f2c…a41d</p>
+                <p className="mt-1.5 font-mono text-[0.58rem] text-ink-500">DSC · 21 Aug 2026</p>
               </div>
             </aside>
 
@@ -132,16 +134,16 @@ export function HeroDashboard() {
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/8 px-4 py-3.5 sm:px-5">
                 <div>
                   <h3 className="text-[0.86rem] font-semibold tracking-[-0.02em] text-white">
-                    Reconciliation Overview
+                    Revenue Assurance Dashboard
                   </h3>
-                  <p className="font-mono text-[0.6rem] text-ink-500">FY26 · Aug 2026 · All entities</p>
+                  <p className="font-mono text-[0.6rem] text-ink-500">FY26 · 3 entities · 14 channels</p>
                 </div>
                 <div className="flex items-center gap-1.5 rounded-lg bg-white/5 p-1">
-                  {['7D', '30D', 'QTD', 'FY'].map((t) => (
+                  {['JUL', 'AUG', 'SEP', 'Q2'].map((t) => (
                     <span
                       key={t}
                       className={`rounded-md px-2.5 py-1 text-[0.6rem] font-semibold ${
-                        t === 'QTD' ? 'bg-brand-500 text-white' : 'text-ink-500'
+                        t === 'SEP' ? 'bg-brand-500 text-white' : 'text-ink-500'
                       }`}
                     >
                       {t}
@@ -167,7 +169,9 @@ export function HeroDashboard() {
                       </span>
                       <span
                         className={`tabular text-[0.62rem] font-semibold ${
-                          kpi.tone === 'signal' ? 'text-signal-400' : kpi.delta.startsWith('−') ? 'text-signal-400' : 'text-ink-500'
+                          kpi.tone === 'signal' || kpi.delta.startsWith('−')
+                            ? 'text-signal-400'
+                            : 'text-ink-500'
                         }`}
                       >
                         {kpi.delta}
@@ -181,7 +185,7 @@ export function HeroDashboard() {
                 {/* Chart */}
                 <div className="bg-ink-950 p-4 sm:p-5">
                   <div className="mb-3 flex items-center justify-between">
-                    <p className="text-[0.68rem] font-semibold text-ink-200">Reconciled vs. leakage</p>
+                    <p className="text-[0.68rem] font-semibold text-ink-200">Reconciled vs. short-paid</p>
                     <div className="flex items-center gap-3 font-mono text-[0.55rem] text-ink-500">
                       <span className="flex items-center gap-1.5">
                         <span className="size-1.5 rounded-full bg-brand-400" />
@@ -189,7 +193,7 @@ export function HeroDashboard() {
                       </span>
                       <span className="flex items-center gap-1.5">
                         <span className="size-1.5 rounded-full bg-alert-500/70" />
-                        Leakage
+                        Short-paid
                       </span>
                     </div>
                   </div>
@@ -212,7 +216,7 @@ export function HeroDashboard() {
 
                     <path d={areaPath(RECONCILED, 196)} fill="url(#reconFill)" />
                     <path d={smoothPath(RECONCILED)} fill="none" stroke="#fb9f3c" strokeWidth="2.2" strokeLinecap="round" />
-                    <path d={smoothPath(LEAKAGE)} fill="none" stroke="url(#leakStroke)" strokeWidth="1.6" strokeDasharray="4 4" strokeLinecap="round" />
+                    <path d={smoothPath(SHORT_PAID)} fill="none" stroke="url(#leakStroke)" strokeWidth="1.6" strokeDasharray="4 4" strokeLinecap="round" />
 
                     <circle cx="536" cy="33" r="4" fill="#fb9f3c" />
                     <circle cx="536" cy="33" r="8" fill="#fb9f3c" opacity="0.22" className="animate-pulse-ring origin-center" />
@@ -225,24 +229,24 @@ export function HeroDashboard() {
                   </div>
                 </div>
 
-                {/* AI insight rail */}
+                {/* Findings rail */}
                 <div className="bg-ink-950 p-4 sm:p-5">
                   <div className="mb-3 flex items-center gap-2">
                     <span className="grid size-5 place-items-center rounded-md bg-brand-500/15 ring-1 ring-brand-500/30">
                       <Glyph name="spark" className="size-3 text-brand-300" />
                     </span>
-                    <p className="text-[0.68rem] font-semibold text-ink-200">AI Exception Queue</p>
+                    <p className="text-[0.68rem] font-semibold text-ink-200">Findings &amp; Claims Queue</p>
                     <span className="ml-auto font-mono text-[0.55rem] text-ink-500">3 open</span>
                   </div>
 
                   <ul className="flex flex-col gap-2.5">
-                    {EXCEPTIONS.map((ex) => (
+                    {FINDINGS.map((ex) => (
                       <li key={ex.label} className="rounded-lg border border-white/8 bg-white/[0.03] p-2.5">
                         <p className="truncate text-[0.65rem] font-medium text-ink-200">{ex.label}</p>
                         <div className="mt-2 flex items-center gap-2">
                           <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/8">
                             <div
-                              className={`h-full rounded-full ${toneRing(ex.tone)} bg-current`}
+                              className={`h-full rounded-full bg-current ${toneRing(ex.tone)}`}
                               style={{ width: `${ex.score}%` }}
                             />
                           </div>
@@ -250,46 +254,47 @@ export function HeroDashboard() {
                             {ex.score}%
                           </span>
                         </div>
-                        <p className="mt-1.5 font-mono text-[0.55rem] text-ink-600">{ex.source}</p>
+                        <p className="mt-1.5 font-mono text-[0.55rem] text-ink-600">Materiality: ₹5,00,000</p>
                       </li>
                     ))}
                   </ul>
 
                   <div className="mt-3 flex items-center gap-2 rounded-lg bg-brand-500/10 px-2.5 py-2 ring-1 ring-brand-500/20">
-                    <Glyph name="bolt" className="size-3 shrink-0 text-brand-300" />
+                    <Glyph name="coins" className="size-3 shrink-0 text-brand-300" />
                     <p className="text-[0.6rem] leading-tight text-brand-100">
-                      Auto-filed 47 claims · <span className="font-semibold text-brand-300">$312K</span> recovered
+                      47 claims filed ·{' '}
+                      <span className="tabular font-semibold text-brand-300">₹1.84 Cr</span> recovered
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Ledger table */}
+              {/* Settlement ledger */}
               <div className="border-t border-white/8">
                 <div className="flex items-center justify-between px-4 py-3 sm:px-5">
-                  <p className="text-[0.68rem] font-semibold text-ink-200">Live ledger stream</p>
-                  <span className="font-mono text-[0.55rem] text-ink-600">virtualized · 40M rows</span>
+                  <p className="text-[0.68rem] font-semibold text-ink-200">Channel settlement ledger</p>
+                  <span className="font-mono text-[0.55rem] text-ink-600">order-level · 1,28,409 rows</span>
                 </div>
                 <div className="overflow-hidden">
-                  <div className="grid grid-cols-[4.5rem_1fr_5.5rem_5.5rem_4rem] gap-2 border-y border-white/8 bg-white/[0.03] px-4 py-2 font-mono text-[0.53rem] tracking-[0.1em] text-ink-600 uppercase sm:px-5">
+                  <div className="grid grid-cols-[4.5rem_1fr_6.5rem_6.5rem_3.2rem] gap-2 border-y border-white/8 bg-white/[0.03] px-4 py-2 font-mono text-[0.53rem] tracking-[0.1em] text-ink-600 uppercase sm:px-5">
                     <span>Ref</span>
                     <span>Channel</span>
                     <span className="text-right">Gross</span>
-                    <span className="text-right">Net</span>
-                    <span className="text-right">Conf.</span>
+                    <span className="text-right">Settled</span>
+                    <span className="text-right">Match</span>
                   </div>
-                  {RECON_ROWS.map((row) => (
+                  {LEDGER_ROWS.map((row) => (
                     <div
                       key={row.id}
-                      className="grid grid-cols-[4.5rem_1fr_5.5rem_5.5rem_4rem] items-center gap-2 border-b border-white/5 px-4 py-2.5 text-[0.66rem] transition-colors last:border-0 hover:bg-white/[0.03] sm:px-5"
+                      className="grid grid-cols-[4.5rem_1fr_6.5rem_6.5rem_3.2rem] items-center gap-2 border-b border-white/5 px-4 py-2.5 text-[0.66rem] transition-colors last:border-0 hover:bg-white/[0.03] sm:px-5"
                     >
                       <span className="truncate font-mono text-ink-500">{row.id}</span>
                       <span className="flex min-w-0 items-center gap-2">
                         <span
                           className={`size-1.5 shrink-0 rounded-full ${
-                            row.status === 'Matched'
+                            row.state === 'Cleared'
                               ? 'bg-signal-500'
-                              : row.status === 'Exception'
+                              : row.state === 'Short'
                                 ? 'bg-alert-500'
                                 : 'bg-brand-400'
                           }`}
@@ -321,7 +326,7 @@ export function HeroDashboard() {
         <div
           className="absolute -top-7 -right-3 hidden animate-float-slow rounded-xl border border-white/12 bg-ink-900/92 px-3.5 py-2.5 shadow-[0_20px_50px_-22px_rgba(0,0,0,0.95)] backdrop-blur-md sm:block lg:-right-8 [transform:translateZ(70px)]"
         >
-          <p className="font-mono text-[0.53rem] tracking-[0.12em] text-ink-500 uppercase">Match rate</p>
+          <p className="font-mono text-[0.53rem] tracking-[0.12em] text-ink-500 uppercase">Reconciled</p>
           <p className="tabular mt-0.5 text-[1.05rem] font-bold text-white">
             99.2<span className="text-brand-300">%</span>
           </p>
@@ -335,15 +340,15 @@ export function HeroDashboard() {
               <span className="absolute size-5 rounded-full bg-signal-500/25 animate-pulse-ring" />
               <span className="size-1.5 rounded-full bg-signal-400" />
             </span>
-            <p className="font-mono text-[0.55rem] text-ink-300">1,284,092 lines reconciled</p>
+            <p className="font-mono text-[0.55rem] text-ink-300">Ledger locked for FY26 audit</p>
           </div>
         </div>
 
         <div
           className="absolute top-1/3 -left-6 hidden animate-float-slow rounded-lg border border-brand-500/25 bg-ink-900/92 px-3 py-2 shadow-[0_18px_40px_-20px_rgba(0,0,0,0.9)] backdrop-blur-md xl:block [animation-delay:-1.8s] [transform:translateZ(120px)]"
         >
-          <p className="text-[0.6rem] font-semibold text-ink-200">Short payment detected</p>
-          <p className="tabular mt-0.5 font-mono text-[0.6rem] text-alert-400">−$4,212.59 · Amazon US</p>
+          <p className="text-[0.6rem] font-semibold text-ink-200">Short settlement flagged</p>
+          <p className="tabular mt-0.5 font-mono text-[0.6rem] text-alert-400">−₹2,65,420 · Amazon</p>
         </div>
       </div>
 

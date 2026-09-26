@@ -1,4 +1,4 @@
-import { COMPLIANCE_BADGES, FOOTER_COLUMNS } from '@/lib/data'
+import { COMPLIANCE_BADGES, FOOTER_COLUMNS, OFFICES, SLA } from '@/lib/data'
 import { Logo } from './ui/Logo'
 import { Glyph } from './ui/Glyph'
 
@@ -12,26 +12,19 @@ const SOCIALS = [
     path: 'M17.53 3H20.5l-6.49 7.41L21.75 21h-5.98l-4.68-6.12L5.7 21H2.73l6.94-7.93L2.5 3h6.13l4.23 5.6L17.53 3zm-1.04 16.2h1.64L7.6 4.72H5.84L16.49 19.2z',
   },
   {
-    label: 'GitHub',
-    path: 'M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .27.18.58.69.48A10 10 0 0012 2z',
+    label: 'YouTube',
+    path: 'M21.6 7.2a2.5 2.5 0 00-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 002.4 7.2 26 26 0 002 12a26 26 0 00.4 4.8 2.5 2.5 0 001.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 001.76-1.77A26 26 0 0022 12a26 26 0 00-.4-4.8zM10 15V9l5.2 3L10 15z',
   },
-]
-
-const STATUS = [
-  { label: 'API', value: 'Operational', tone: 'text-signal-400' },
-  { label: 'Reconciliation', value: 'Operational', tone: 'text-signal-400' },
-  { label: 'Inference', value: 'Operational', tone: 'text-signal-400' },
-  { label: 'Console', value: 'Operational', tone: 'text-signal-400' },
 ]
 
 export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-ink-900/8 bg-ink-50/70">
-      {/* Compliance trust band */}
+      {/* Credentials band */}
       <div className="border-b border-ink-900/8 bg-white">
         <div className="mx-auto flex max-w-[84rem] flex-col items-center gap-5 px-5 py-7 sm:px-8 lg:flex-row lg:justify-between">
           <p className="font-mono text-[0.64rem] tracking-[0.18em] text-ink-400 uppercase">
-            Compliance &amp; trust
+            Credentials &amp; compliance
           </p>
           <ul className="flex flex-wrap items-center justify-center gap-2.5">
             {COMPLIANCE_BADGES.map((badge) => (
@@ -52,17 +45,17 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,3fr)]">
           {/* Brand block */}
           <div>
-            <Logo />
+            <Logo tagline />
             <p className="mt-5 max-w-xs text-[0.88rem] leading-relaxed text-ink-500">
-              The AI reconciliation and revenue intelligence engine for multi-channel commerce and enterprise finance
-              teams.
+              A chartered accountancy firm delivering audit, tax, financial reporting and revenue assurance to
+              growing businesses across India.
             </p>
 
             <div className="mt-6 flex items-center gap-2.5">
               {SOCIALS.map((s) => (
                 <a
                   key={s.label}
-                  href="#"
+                  href="#contact"
                   aria-label={s.label}
                   className="grid size-9 place-items-center rounded-lg border border-ink-900/10 bg-white text-ink-500 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-600"
                 >
@@ -75,22 +68,31 @@ export function Footer() {
 
             <div className="mt-7 rounded-xl border border-ink-900/8 bg-white p-4">
               <p className="font-mono text-[0.58rem] tracking-[0.16em] text-ink-400 uppercase">
-                Platform status
+                Response commitments
               </p>
               <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2">
-                {STATUS.map((s) => (
+                {SLA.map((s) => (
                   <li key={s.label} className="flex items-center gap-1.5 text-[0.72rem]">
                     <span className="size-1.5 rounded-full bg-signal-500" />
                     <span className="truncate text-ink-600">{s.label}</span>
-                    <span className={`ml-auto shrink-0 font-mono text-[0.6rem] ${s.tone}`}>100%</span>
+                    <span className="ml-auto shrink-0 font-mono text-[0.6rem] text-ink-900">{s.value}</span>
                   </li>
                 ))}
               </ul>
             </div>
+
+            <ul className="mt-4 grid grid-cols-2 gap-2">
+              {OFFICES.map((o) => (
+                <li key={o.city} className="rounded-lg border border-ink-900/8 bg-white/60 px-3 py-2.5">
+                  <span className="block text-[0.78rem] font-semibold text-ink-900">{o.city}</span>
+                  <span className="block truncate text-[0.66rem] text-ink-500">{o.line}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Link columns */}
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
             {FOOTER_COLUMNS.map((col) => (
               <div key={col.title}>
                 <h3 className="text-[0.82rem] font-bold tracking-[-0.02em] text-ink-950">{col.title}</h3>
@@ -126,22 +128,24 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-center justify-between gap-5 border-t border-ink-900/8 pt-7 md:flex-row">
           <p className="text-center text-[0.78rem] text-ink-500 md:text-left">
-            © {new Date().getFullYear()} HMRECON Technologies Pvt. Ltd. All rights reserved.
+            © {new Date().getFullYear()} HMRECON &amp; Co., Chartered Accountants. All rights reserved.
           </p>
 
           <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {['Privacy Policy', 'Terms of Service', 'Security', 'DPA', 'Acceptable Use', 'Status'].map((l) => (
-              <li key={l}>
-                <a href="#" className="text-[0.78rem] text-ink-500 transition-colors hover:text-brand-600">
-                  {l}
-                </a>
-              </li>
-            ))}
+            {['Privacy Policy', 'Terms of Engagement', 'Conflict Policy', 'DPDP Notice', 'Grievance Officer'].map(
+              (l) => (
+                <li key={l}>
+                  <a href="#contact" className="text-[0.78rem] text-ink-500 transition-colors hover:text-brand-600">
+                    {l}
+                  </a>
+                </li>
+              ),
+            )}
           </ul>
 
           <p className="flex items-center gap-2 font-mono text-[0.68rem] text-ink-400">
             <span className="size-1.5 rounded-full bg-signal-500" />
-            All systems operational
+            Filings on track · 2026
           </p>
         </div>
 

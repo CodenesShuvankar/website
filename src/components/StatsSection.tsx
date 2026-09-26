@@ -1,6 +1,6 @@
 import { useCountUp } from '@/hooks/useCountUp'
 import { useInView } from '@/hooks/useInView'
-import { STATS, type Stat } from '@/lib/data'
+import { DIAGNOSTIC_STATS, STATS, TESTIMONIALS, type Stat } from '@/lib/data'
 import { Glyph } from './ui/Glyph'
 import { Reveal } from './ui/Reveal'
 import { Button } from './ui/Button'
@@ -50,26 +50,9 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
   )
 }
 
-const PROOF = [
-  {
-    quote:
-      'We closed August in four days instead of eleven. The first month, HMRECON found $1.2M in commission leakage we had been writing off for two years.',
-    name: 'Priya Raghunathan',
-    role: 'VP Finance, D2C Group · 4 storefronts, 9 marketplaces',
-    metric: '$1.2M recovered in month one',
-  },
-  {
-    quote:
-      'Our auditors asked for the payout-to-invoice trail for 40,000 lines. It was a single query. That used to be a three-week project every single quarter.',
-    name: 'Daniel Okonkwo',
-    role: 'Controller, Multi-entity Retail · SAP + Tally',
-    metric: 'Audit prep: 3 weeks → 1 day',
-  },
-]
-
 export function StatsSection() {
   return (
-    <section id="roi" className="relative overflow-hidden bg-ink-950 py-20 sm:py-28">
+    <section id="results" className="relative overflow-hidden bg-ink-950 py-20 sm:py-28">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div
           className="absolute inset-0 opacity-[0.55]"
@@ -89,16 +72,16 @@ export function StatsSection() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <p className="font-mono text-[0.68rem] tracking-[0.2em] text-brand-300 uppercase">
-                Measurable outcomes
+                Measured, not claimed
               </p>
               <h2 className="mt-3 text-[2rem] font-extrabold tracking-[-0.045em] text-white sm:text-[2.6rem]">
-                The numbers your board{' '}
-                <span className="text-gradient-brand">actually asks about</span>
+                The numbers your board and{' '}
+                <span className="text-gradient-brand">your auditor ask about</span>
               </h2>
             </div>
             <p className="max-w-sm text-[0.92rem] leading-relaxed text-ink-400">
-              Aggregated, anonymized results across 400+ finance teams running HMRECON in production. Median values,
-              first 12 months.
+              Firm-wide statistics for the last three financial years. Individual engagement outcomes vary with scope
+              and client systems.
             </p>
           </div>
         </Reveal>
@@ -111,32 +94,32 @@ export function StatsSection() {
           ))}
         </div>
 
-        {/* Proof points */}
-        <div className="mt-16 grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {PROOF.map((p, i) => (
-            <Reveal key={p.name} delay={i * 110}>
-              <figure className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7">
+        {/* Client outcomes */}
+        <div className="mt-16 grid grid-cols-1 gap-4 lg:grid-cols-3">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} delay={i * 100}>
+              <figure className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7">
                 <Glyph
-                  name="chart"
+                  name="users"
                   className="absolute -right-4 -bottom-4 size-28 text-white/[0.04]"
                   strokeWidth={1}
                 />
-                <p className="tabular inline-flex items-center gap-2 rounded-full bg-brand-500/12 px-3 py-1.5 text-[0.72rem] font-semibold text-brand-300 ring-1 ring-brand-500/25">
-                  {p.metric}
+                <p className="tabular relative inline-flex w-fit items-center gap-2 rounded-full bg-brand-500/12 px-3 py-1.5 text-[0.72rem] font-semibold text-brand-300 ring-1 ring-brand-500/25">
+                  {t.metric}
                 </p>
-                <blockquote className="relative mt-5 text-[1.02rem] leading-relaxed font-medium text-ink-100">
-                  &ldquo;{p.quote}&rdquo;
+                <blockquote className="relative mt-5 flex-1 text-[0.98rem] leading-relaxed font-medium text-ink-100">
+                  &ldquo;{t.quote}&rdquo;
                 </blockquote>
                 <figcaption className="relative mt-6 flex items-center gap-3 border-t border-white/8 pt-5">
                   <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand-gradient text-[0.78rem] font-bold text-white">
-                    {p.name
+                    {t.name
                       .split(' ')
                       .map((n) => n[0])
                       .join('')}
                   </span>
                   <span className="min-w-0">
-                    <span className="block truncate text-[0.85rem] font-semibold text-white">{p.name}</span>
-                    <span className="block truncate text-[0.75rem] text-ink-500">{p.role}</span>
+                    <span className="block truncate text-[0.85rem] font-semibold text-white">{t.name}</span>
+                    <span className="block truncate text-[0.75rem] text-ink-500">{t.role}</span>
                   </span>
                 </figcaption>
               </figure>
@@ -144,41 +127,33 @@ export function StatsSection() {
           ))}
         </div>
 
-        {/* ROI calculator teaser */}
+        {/* Free diagnostic CTA */}
         <Reveal delay={100}>
           <div className="mt-4 grid grid-cols-1 items-center gap-8 overflow-hidden rounded-3xl bg-brand-gradient p-8 sm:p-10 lg:grid-cols-[1.15fr_1fr] lg:p-12">
             <div>
               <h3 className="text-[1.6rem] leading-tight font-extrabold tracking-[-0.04em] text-white sm:text-[2rem]">
-                Calculate your recoverable revenue in under 60 seconds.
+                Start with a free 45-minute diagnostic.
               </h3>
               <p className="mt-3 max-w-lg text-[0.95rem] leading-relaxed text-white/85">
-                Input your monthly payout volume and average channel count. Our ROI model projects recoverable leakage,
-                hours saved, and payback period — based on benchmarks from 400+ deployments.
+                No charge, no obligation, no sales deck. A partner reviews your current books, tells you where the
+                exposure sits, and gives you a fixed-fee proposal in writing within five working days.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Button
-                  size="lg"
-                  className="w-full bg-ink-950 text-white shadow-none hover:bg-ink-900 sm:w-auto"
-                >
-                  Open the ROI calculator
+                <Button size="lg" className="w-full bg-ink-950 text-white shadow-none hover:bg-ink-900 sm:w-auto">
+                  Book a Consultation
                 </Button>
                 <Button
                   size="lg"
                   variant="secondary"
                   className="w-full border-0 bg-white/20 text-white ring-0 backdrop-blur-sm hover:bg-white/30 sm:w-auto"
                 >
-                  Talk to sales
+                  See our fee structure
                 </Button>
               </div>
             </div>
 
             <dl className="grid grid-cols-2 gap-3">
-              {[
-                { v: '$0', l: 'Setup cost' },
-                { v: '< 14d', l: 'Time to value' },
-                { v: '3.4×', l: 'Typical ROI' },
-                { v: '0', l: 'Spreadsheets migrated' },
-              ].map((item) => (
+              {DIAGNOSTIC_STATS.map((item) => (
                 <div
                   key={item.l}
                   className="rounded-2xl border border-white/20 bg-white/12 p-4 backdrop-blur-sm"

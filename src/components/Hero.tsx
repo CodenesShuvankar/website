@@ -2,12 +2,12 @@ import { Button } from './ui/Button'
 import { HeroDashboard } from './hero/HeroDashboard'
 
 const TRUST = [
-  { value: '$4.2B', label: 'Reconciled monthly' },
-  { value: '99.2%', label: 'Median match accuracy' },
-  { value: '11 days', label: 'Faster time to close' },
+  { value: '1,200+', label: 'Engagements delivered' },
+  { value: '98%', label: 'On-time statutory filings' },
+  { value: '6.2 days', label: 'Average turnaround' },
 ]
 
-const TICKER = ['recon.run.completed', 'ledger.entry.sealed', 'claim.filed', 'payout.recovered']
+const FILINGS = ['GSTR-3B filed', 'TDS 26Q submitted', 'Statutory audit signed', 'Channel claims settled']
 
 export function Hero() {
   return (
@@ -22,27 +22,24 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-[84rem] px-5 sm:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Announcement pill */}
+          {/* Credential pill */}
           <div className="animate-rise inline-flex items-center gap-2.5 rounded-full border border-ink-900/8 bg-white/70 py-1.5 pr-4 pl-1.5 shadow-[0_2px_14px_-6px_rgba(8,12,21,0.25)] backdrop-blur-md">
-            <span className="rounded-full bg-brand-gradient px-2.5 py-1 text-[0.62rem] font-bold tracking-[0.08em] text-white uppercase">
-              New
+            <span className="rounded-full bg-brand-gradient px-2.5 py-1 text-[0.6rem] font-bold tracking-[0.08em] text-white uppercase">
+              ICAI Reg.
             </span>
             <span className="text-[0.78rem] font-medium text-ink-700">
-              Autonomous Close — books closed in 2 days
+              Firm Registration No. 138472/W/M — Chartered Accountants
             </span>
-            <svg viewBox="0 0 16 16" className="size-3 text-ink-400" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M6 3.5L10.5 8 6 12.5" />
-            </svg>
           </div>
 
           {/* Headline */}
           <h1
-            className="animate-rise mt-7 text-[2.6rem] leading-[1.03] font-extrabold tracking-[-0.045em] text-ink-950 sm:text-[3.6rem] lg:text-[4.35rem]"
+            className="animate-rise mt-7 text-[2.6rem] leading-[1.03] font-extrabold tracking-[-0.045em] text-ink-950 sm:text-[3.6rem] lg:text-[4.3rem]"
             style={{ animationDelay: '80ms' }}
           >
-            Automate Your Entire{' '}
+            Numbers you can sign.{' '}
             <span className="relative whitespace-nowrap">
-              <span className="text-gradient-brand">Revenue</span>
+              <span className="text-gradient-brand">Accounts</span>
               <svg
                 aria-hidden="true"
                 viewBox="0 0 200 12"
@@ -55,7 +52,7 @@ export function Hero() {
                 <path d="M3 8.5C40 3.5 92 3 197 6" />
               </svg>
             </span>{' '}
-            &amp; Reconciliation Operation.
+            you can defend.
           </h1>
 
           {/* Subheadline */}
@@ -63,9 +60,9 @@ export function Hero() {
             className="animate-rise mx-auto mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-ink-600 sm:text-[1.12rem]"
             style={{ animationDelay: '160ms' }}
           >
-            HMRECON is the AI reconciliation and revenue intelligence engine that eliminates revenue leaks,
-            reconciles multi-channel data, and gives your finance team a single, defensible source of financial truth
-            — in near real time.
+            HMRECON is a chartered accountancy firm handling audit, tax, financial reporting and revenue assurance
+            for growing businesses. We reconcile what you earned against what you were actually paid, file everything
+            on time, and hand you a defensible set of books.
           </p>
 
           {/* CTAs */}
@@ -74,7 +71,7 @@ export function Hero() {
             style={{ animationDelay: '240ms' }}
           >
             <Button variant="primary" size="lg" className="w-full sm:w-auto">
-              Book a Demo
+              Book a Consultation
               <svg viewBox="0 0 16 16" className="size-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" />
               </svg>
@@ -84,7 +81,7 @@ export function Hero() {
                 <path d="M6.5 4.2l5 3.8-5 3.8V4.2z" />
                 <rect x="2" y="2.5" width="12" height="11" rx="2.4" />
               </svg>
-              Explore Architecture
+              Explore Our Services
             </Button>
           </div>
 
@@ -92,7 +89,7 @@ export function Hero() {
             className="animate-rise mt-5 font-mono text-[0.7rem] text-ink-400"
             style={{ animationDelay: '300ms' }}
           >
-            No credit card · 30-day pilot · SOC 2 Type II · Deploys in 14 days
+            Fixed fees · Partner-led · NDA before the first call · Serving 4 cities
           </p>
         </div>
 
@@ -105,7 +102,8 @@ export function Hero() {
         <div className="mt-16 border-t border-ink-900/8 pt-10 sm:mt-20">
           <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-between">
             <p className="max-w-xs text-center text-[0.82rem] leading-relaxed text-ink-500 lg:text-left">
-              Trusted by finance and operations teams reconciling high-volume, multi-channel revenue.
+              A finance team that has sat on both sides of the audit table — and closed the books for 1,200+
+              engagements.
             </p>
             <dl className="grid w-full grid-cols-1 gap-6 sm:grid-cols-3 lg:w-auto lg:gap-14">
               {TRUST.map((t) => (
@@ -124,16 +122,16 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Live event ticker */}
+      {/* Live filings ticker */}
       <div className="relative mt-14 border-y border-ink-900/8 bg-ink-950 py-3">
         <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
           <div className="animate-marquee flex shrink-0 items-center gap-10 pr-10 font-mono text-[0.7rem] whitespace-nowrap text-ink-400">
-            {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((event, i) => (
+            {[...FILINGS, ...FILINGS, ...FILINGS, ...FILINGS].map((event, i) => (
               <span key={`${event}-${i}`} className="flex items-center gap-2.5">
                 <span className="size-1.5 rounded-full bg-signal-500" />
                 <span className="text-ink-200">{event}</span>
-                <span className="text-ink-600">200 OK</span>
-                <span className="text-ink-600">{String(12 + i * 3).padStart(2, '0')}ms</span>
+                <span className="text-signal-400">ACK RECEIVED</span>
+                <span className="text-ink-600">ARIN {2026000 + i * 137}</span>
                 <span className="text-brand-400">·</span>
               </span>
             ))}

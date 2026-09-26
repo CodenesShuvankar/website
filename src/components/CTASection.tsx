@@ -2,11 +2,16 @@ import { Button } from './ui/Button'
 import { Reveal } from './ui/Reveal'
 import { Glyph } from './ui/Glyph'
 
-const ASSURANCES = ['30-day pilot', 'SOC 2 Type II', 'No data lock-in', 'Dedicated solutions engineer']
+const ASSURANCES = [
+  'NDA before the first call',
+  'Fixed fee, quoted in writing',
+  'Partner-led throughout',
+  'No hourly billing',
+]
 
 export function CTASection() {
   return (
-    <section id="demo" className="relative overflow-hidden bg-white py-20 sm:py-28">
+    <section id="contact" className="relative overflow-hidden bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-[84rem] px-5 sm:px-8">
         <Reveal>
           <div className="relative overflow-hidden rounded-[2rem] bg-ink-950 px-6 py-16 text-center sm:px-12 sm:py-20 lg:px-20">
@@ -27,22 +32,22 @@ export function CTASection() {
             <div className="relative">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-4 py-1.5 font-mono text-[0.65rem] tracking-[0.16em] text-brand-300 uppercase backdrop-blur-sm">
                 <span className="size-1.5 rounded-full bg-brand-400 animate-blink" />
-                Now onboarding Q3 cohorts
+                Now accepting Q3 engagements
               </span>
 
-              <h2 className="mx-auto mt-6 max-w-3xl text-[2.1rem] leading-[1.06] font-extrabold tracking-[-0.048em] text-white sm:text-[2.9rem] lg:text-[3.3rem]">
-                Your revenue is telling the truth.{' '}
-                <span className="text-gradient-brand">Go find out how much.</span>
+              <h2 className="mx-auto mt-6 max-w-3xl text-[2.1rem] leading-[1.06] font-extrabold tracking-[-0.048em] text-white sm:text-[2.9rem] lg:text-[3.2rem]">
+                Bring us your books.{' '}
+                <span className="text-gradient-brand">We'll tell you where the risk is.</span>
               </h2>
 
               <p className="mx-auto mt-5 max-w-xl text-[1rem] leading-relaxed text-ink-400 sm:text-[1.08rem]">
-                Book a 30-minute working session. We'll connect one of your live channels, run a real reconciliation, and
-                show you exactly what it recovers.
+                A 45-minute call with a partner. We review your current position, flag exposure, and send a fixed-fee
+                proposal in writing within five working days. If we are not the right firm, we will say so.
               </p>
 
               <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Button variant="primary" size="lg" className="w-full sm:w-auto">
-                  Book a Demo
+                  Book a Consultation
                   <svg viewBox="0 0 16 16" className="size-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" />
                   </svg>
@@ -52,7 +57,7 @@ export function CTASection() {
                     <path d="M6.5 4.2l5 3.8-5 3.8V4.2z" />
                     <rect x="2" y="2.5" width="12" height="11" rx="2.4" />
                   </svg>
-                  Explore Architecture
+                  Download Firm Profile
                 </Button>
               </div>
 
